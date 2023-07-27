@@ -2,6 +2,7 @@ import React, {useRef, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
+import $ from "jquery";
 
 const Slider = () => {
     const slideRef = useRef(null);
@@ -31,6 +32,7 @@ const Slider = () => {
             }, (i + 1) * 450);
 
         }
+        getAllUsers();
         console.log(items)
         console.log(index)
         console.log(id)
@@ -44,6 +46,15 @@ const Slider = () => {
         window.location.href = url;
     };
 
+    function getAllUsers() {
+        const response = $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/carousel/get-all-carousel",
+            dataType: 'json',
+            contentType: 'application/json',
+        });
+        console.log(response);
+    }
     const data = [
         {
             id: 1,
