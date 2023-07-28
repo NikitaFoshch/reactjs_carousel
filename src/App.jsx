@@ -1,6 +1,7 @@
 import React, {useRef, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import  axios from "axios"
 import "./index.css";
 import $ from "jquery";
 
@@ -15,11 +16,8 @@ const Slider = () => {
 
     function handleClickProj(id) {
         console.log("---------");
-        console.log(id)
         let items = slideRef.current.querySelectorAll(".item");
         let index = 0;
-        console.log(index)
-        console.log(items[0].querySelector('div[hidden]').innerText)
         for (let i = 0; i < items.length; i++) {
             if (items[i].querySelector('div[hidden]').innerText === String(id)) {
                 index = i;
@@ -32,10 +30,7 @@ const Slider = () => {
             }, (i + 1) * 450);
 
         }
-        getAllUsers();
-        console.log(items)
-        console.log(index)
-        console.log(id)
+        getData();
     };
 
     const handleClickPrev = () => {
@@ -55,6 +50,16 @@ const Slider = () => {
         });
         console.log(response);
     }
+    function getData(){
+        axios.get("http://localhost:8080/carousel/get-all-carousel")
+            .then(
+                (result) => {
+                    console.log(result)
+                }
+            )
+    }
+
+    const data1 =  getData();
     const data = [
         {
             id: 1,
