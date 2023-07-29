@@ -9,6 +9,10 @@ const Slider = () => {
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [carousel, setCarousel] = useState([]);
 
+    useEffect(() => {
+        getData();
+    }, []);
+
     const handleClickNext = () => {
         let items = slideRef.current.querySelectorAll(".item");
         slideRef.current.appendChild(items[0]);
@@ -40,13 +44,9 @@ const Slider = () => {
         window.location.href = url;
     };
 
-    useEffect(() => {
-        getData();
-    }, []);
-
     function getData() {
 
-        axios.get("http://localhost:8080/carousel/get-all-carousel")
+        axios.get("http://localhost:8081/carousel/get-all-carousel")
             .then(
                 (result) => {
                     setCarousel(result.data.carousel);
@@ -54,14 +54,11 @@ const Slider = () => {
             )
     }
 
-    const data = carousel;
-    console.log(data)
-
     return (
         <div className="container">
             <div className="loadbar" style={{width: `${loadingProgress}%`}}></div>
             <div id="slide" ref={slideRef}>
-                {data.map((item) => (
+                {carousel.map((item) => (
                     <div
                         key={item.id}
                         className="item"
