@@ -55,6 +55,7 @@ const Slider = () => {
     }
 
     const data = carousel;
+    console.log(data)
 
     return (
         <div className="container">
@@ -70,7 +71,7 @@ const Slider = () => {
                         <div className="content">
                             <div hidden={true}>{item.id}</div>
                             <div className="name">{item.projectName}</div>
-                            <div className="des">{item.desc}</div>
+                            <div className="des">{item.description}</div>
                             <div className="des">{item.login}</div>
                             <div className="des">{item.password}</div>
                             <button role={"button"} onClick={() => handClickUrl(item.projectUrl)}>See more</button>
